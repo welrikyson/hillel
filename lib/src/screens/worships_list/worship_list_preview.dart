@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hillel/src/widgets/common/list_view_card.dart';
 
 class WorshipListPreview extends StatefulWidget {
   @override
@@ -9,50 +10,46 @@ class _WorshipListPreviewState extends State<WorshipListPreview> {
   List<Item> _items = MockItens().getAll();
   @override
   Widget build(BuildContext context) {
-    return ReorderableListView(      
+    return ReorderableListView(
       header: Text('List of songs'),
-      children: [
-        for (var item in _items) 
-          ListTile(
-            key: ValueKey(Item),
-            title: Text(item.title),
-          )
-      ], onReorder: (int oldIndex, int newIndex) {
+      children: List.generate(_items.length, (index) {
+        return ListViewCard(
+          _items,
+          index,
+          Key('$index'),
+        );
+      }),
+      onReorder: (int oldIndex, int newIndex) {
         setState(() {
-          _updateMyItems(oldIndex,newIndex);
+          _updateMyItems(oldIndex, newIndex);
         });
-      },       
-      
+      },
     );
   }
 
   void _updateMyItems(int oldIndex, int newIndex) {
-      if(newIndex > oldIndex){
-        newIndex -= 1;
-      }
+    if (newIndex > oldIndex) {
+      newIndex -= 1;
+    }
 
-      final Item item = _items.removeAt(oldIndex);
-      _items.insert(newIndex, item);
-
+    final Item item = _items.removeAt(oldIndex);
+    _items.insert(newIndex, item);
   }
 }
 
-
 class Item {
   final String title;
-
-  Item({this.title});
-
-  
+  final String style;
+  Item({this.title, this.style});
 }
 
 class MockItens {
-  List<Item> getAll(){
+  List<Item> getAll() {
     return <Item>[
-      Item(title: 'Rei dos Reis'),
-      Item(title: 'Vem essa é a hora da adoração'),
-      Item(title: 'Ao Único'),
-      Item(title: 'Doce Nome'),
+      Item(title: 'Rei dos Reis', style: 'Celebração'),
+      Item(title: 'Vem essa é a hora da adoração', style: 'Celebração'),
+      Item(title: 'Ao Único', style: 'Adoração'),
+      Item(title: 'Doce Nome', style: 'Adoração'),
     ];
   }
 }
