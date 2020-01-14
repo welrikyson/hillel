@@ -18,11 +18,13 @@ class _WorshipListItemDetailsState extends State<WorshipListItemDetails> {
     var result = await showSearch(
       context: context,
       delegate: ItemSearch(
-        items: UnmodifiableListView( MockItens().getAll()),
+        items: UnmodifiableListView(MockItens().getAll()),
       ),
     );
     if (result != null) {
-      widget.item.title = result.title; 
+      setState(() {
+        widget.item.title = result.title;
+      });
     }
   }
 
@@ -77,6 +79,9 @@ class _WorshipListItemDetailsState extends State<WorshipListItemDetails> {
               height: 10,
             ),
             TextFormField(
+              controller: TextEditingController(
+                text: widget.item.title,
+              ),
               readOnly: true,
               decoration: InputDecoration(
                 labelText: 'song',
@@ -85,38 +90,12 @@ class _WorshipListItemDetailsState extends State<WorshipListItemDetails> {
                 hintText: 'song',
                 suffixIcon: Icon(Icons.library_music),
               ),
-              onTap: openSearcherSongs,
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            DropdownButtonFormField<String>(
-              isDense: true,
-              decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'song',
-                  prefixIcon: Icon(Icons.music_note)),
-              value: widget.item.style,
-              icon: Icon(Icons.arrow_drop_down),
-              hint: Text('Tipo lavagem'),
               onChanged: (String newValue) {
                 setState(() {
-                  widget.item.style = newValue;
+                  widget.item.title = newValue;
                 });
               },
-              items: <String>[
-                'Manual',
-                'Oferta',
-                'Visitante',
-                'Adoração',
-                'Celebração',
-                'Comunhão',
-              ].map<DropdownMenuItem<String>>((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value),
-                );
-              }).toList(),
+              onTap: openSearcherSongs,
             ),
           ],
         ),
