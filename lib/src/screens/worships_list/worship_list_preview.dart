@@ -53,7 +53,7 @@ class _WorshipListPreviewState extends State<WorshipListPreview> {
 }
 
 class Item {
-  final String title;
+  String title;
   String style;
   Item({this.title, this.style});
 }

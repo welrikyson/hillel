@@ -21,7 +21,9 @@ class _WorshipListItemDetailsState extends State<WorshipListItemDetails> {
         items: UnmodifiableListView( MockItens().getAll()),
       ),
     );
-    if (result != null) {}
+    if (result != null) {
+      widget.item.title = result.title; 
+    }
   }
 
   @override
