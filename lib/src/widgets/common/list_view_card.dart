@@ -5,8 +5,8 @@ class ListViewCard extends StatefulWidget {
   final int index;
   final Key key;
   final List<Item> listItems;
-
-  ListViewCard(this.listItems, this.index, this.key);
+  final Function onTab;
+  ListViewCard(this.listItems, this.index, this.key,{this.onTab});
 
   @override
   _ListViewCard createState() => _ListViewCard();
@@ -16,10 +16,11 @@ class _ListViewCard extends State<ListViewCard> {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: EdgeInsets.all(4),
+      margin: EdgeInsets.all(4),      
       color: Colors.white,
       child: InkWell(
-        splashColor: Colors.blue,        
+        onTap: widget.onTab,
+        splashColor: Colors.blue,
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
@@ -31,7 +32,7 @@ class _ListViewCard extends State<ListViewCard> {
                     padding: const EdgeInsets.all(8.0),
                     alignment: Alignment.topLeft,
                     child: Text(
-                      '${widget.listItems[widget.index].style}',
+                      '${widget.listItems[widget.index].title}',
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                       textAlign: TextAlign.left,
@@ -42,7 +43,7 @@ class _ListViewCard extends State<ListViewCard> {
                     padding: const EdgeInsets.all(8.0),
                     alignment: Alignment.topLeft,
                     child: Text(
-                      'Song ${widget.listItems[widget.index].title}',
+                      '${widget.listItems[widget.index].style}',
                       style: TextStyle(
                           fontWeight: FontWeight.normal, fontSize: 16),
                       textAlign: TextAlign.left,

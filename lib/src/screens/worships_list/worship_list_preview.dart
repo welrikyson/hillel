@@ -8,15 +8,21 @@ class WorshipListPreview extends StatefulWidget {
 
 class _WorshipListPreviewState extends State<WorshipListPreview> {
   List<Item> _items = MockItens().getAll();
+
+  showEditWorshipListItem(){
+    
+  }
+
   @override
   Widget build(BuildContext context) {
     return ReorderableListView(
-      header: Text('List of songs'),
+      // header: Text('List of songs'),
       children: List.generate(_items.length, (index) {
         return ListViewCard(
           _items,
           index,
           Key('$index'),
+          onTab: showEditWorshipListItem,
         );
       }),
       onReorder: (int oldIndex, int newIndex) {
@@ -47,9 +53,12 @@ class MockItens {
   List<Item> getAll() {
     return <Item>[
       Item(title: 'Rei dos Reis', style: 'Celebração'),
+      Item(title: 'vinho e pão', style: 'Comunhão'),
+      Item(title: 'Oferta de amor', style: 'Oferta'),
       Item(title: 'Vem essa é a hora da adoração', style: 'Celebração'),
+      Item(title: 'Outra vez', style: 'Adoração'),
       Item(title: 'Ao Único', style: 'Adoração'),
-      Item(title: 'Doce Nome', style: 'Adoração'),
+      Item(title: 'Doce Nome', style: 'Adoração'),      
     ];
   }
 }
