@@ -5,13 +5,13 @@ class ListViewCard extends StatefulWidget {
   final int index;
   final Key key;
   final List<Item> listItems;
-  final Function onTab;
+  final ListViewCardTab onTab;
   ListViewCard(this.listItems, this.index, this.key,{this.onTab});
 
   @override
   _ListViewCard createState() => _ListViewCard();
 }
-
+typedef ListViewCardTab = void Function(Item item );
 class _ListViewCard extends State<ListViewCard> {
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,7 @@ class _ListViewCard extends State<ListViewCard> {
       margin: EdgeInsets.all(4),      
       color: Colors.white,
       child: InkWell(
-        onTap: widget.onTab,
+        onTap: (){widget.onTab(widget.listItems[widget.index]);},
         splashColor: Colors.blue,
         child: Row(
           mainAxisSize: MainAxisSize.min,

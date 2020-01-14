@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hillel/src/screens/worships_list/worship_list_item_details.dart';
 import 'package:hillel/src/widgets/common/list_view_card.dart';
 
 class WorshipListPreview extends StatefulWidget {
@@ -9,8 +10,16 @@ class WorshipListPreview extends StatefulWidget {
 class _WorshipListPreviewState extends State<WorshipListPreview> {
   List<Item> _items = MockItens().getAll();
 
-  showEditWorshipListItem(){
-    
+  showEditWorshipListItem(Item item) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (context) => 
+            WorshipListItemDetails(
+                item: item,
+          )
+      ),
+    );
   }
 
   @override
@@ -45,7 +54,7 @@ class _WorshipListPreviewState extends State<WorshipListPreview> {
 
 class Item {
   final String title;
-  final String style;
+  String style;
   Item({this.title, this.style});
 }
 
@@ -58,7 +67,7 @@ class MockItens {
       Item(title: 'Vem essa é a hora da adoração', style: 'Celebração'),
       Item(title: 'Outra vez', style: 'Adoração'),
       Item(title: 'Ao Único', style: 'Adoração'),
-      Item(title: 'Doce Nome', style: 'Adoração'),      
+      Item(title: 'Doce Nome', style: 'Adoração'),
     ];
   }
 }
