@@ -1,8 +1,9 @@
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
-import 'package:hillel/src/screens/worships_list/search_item.dart';
+import 'package:hillel/src/screens/worships_list/song_search.dart';
 import 'package:hillel/src/screens/worships_list/worship_list_preview.dart';
+import 'package:hillel/src/services/songs_service.dart';
 
 class WorshipListItemDetails extends StatefulWidget {
   final Item item;
@@ -17,8 +18,8 @@ class _WorshipListItemDetailsState extends State<WorshipListItemDetails> {
   Future<void> openSearcherSongs() async {
     var result = await showSearch(
       context: context,
-      delegate: ItemSearch(
-        items: UnmodifiableListView(MockItens().getAll()),
+      delegate: SongSearch(
+        songs: UnmodifiableListView(await SongsService().allSongs()),
       ),
     );
     if (result != null) {

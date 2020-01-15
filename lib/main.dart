@@ -30,8 +30,8 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> { 
 
   void _doAnything() async{
-    var songs = await SongsService().allSongs();
-    
+    var songs = await SongsService().titleContains(str: 'O');
+    print(songs);
     setState(() {      
     });
   }
