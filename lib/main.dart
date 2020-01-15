@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hillel/src/screens/worships_list/worship_list_preview.dart';
+import 'package:hillel/src/services/songs_service.dart';
 
 void main() => runApp(MyApp());
 
@@ -28,7 +29,9 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> { 
 
-  void _incrementCounter() {
+  void _doAnything() async{
+    var songs = await SongsService().allSongs();
+    
     setState(() {      
     });
   }
@@ -43,9 +46,9 @@ class _MyHomePageState extends State<MyHomePage> {
         child: WorshipListPreview(),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
+        onPressed: _doAnything,
         tooltip: 'Increment',
-        child: Icon(Icons.add),
+        child: Icon(Icons.add),        
       ),
     );
   }
