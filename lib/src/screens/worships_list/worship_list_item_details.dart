@@ -18,9 +18,7 @@ class _WorshipListItemDetailsState extends State<WorshipListItemDetails> {
   Future<void> openSearcherSongs() async {
     var result = await showSearch(
       context: context,
-      delegate: SongSearch(
-        songs: UnmodifiableListView(await SongsService().allSongs()),
-      ),
+      delegate: SongSearch(),
     );
     if (result != null) {
       setState(() {

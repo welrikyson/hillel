@@ -23,17 +23,17 @@ class SongsService {
   }
 
   Future<List<SongModel>> titleContains({String str}) async{
-    const strName = 'str';
+    const strName = 'strN';
     String docQuery = """
-      {
-        songs (where: {title: {_like: \$str}}){
-            id
-            title
-            artist
-          }
-      }
+      query MyQuery {
+  songs(where: {title: {_like: "$str%"}}) {
+    id
+    title
+    artist
+  }
+}
     """;    
-    var resultQuery =  await hasuraConnect.query(docQuery, variables: {"str": '%$str%'});
+    var resultQuery =  await hasuraConnect.query(docQuery); //, variables: {strName:  str}
     var results = resultQuery['data']['songs'];
     print(results.toString());
     return SongModel.fromJsonList(results);        
